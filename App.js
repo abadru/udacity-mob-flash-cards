@@ -1,22 +1,21 @@
 import React, { useState } from "react";
-import { Text, View } from "react-native";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
-import { useScreens } from "react-native-screens";
+import { enableScreens } from "react-native-screens";
 
 import MealsNavigator from "./navigation/FlashCardNavigator";
 
 import { createStore, combineReducers } from "redux";
-import mealsReducer from "./store/reducers/meals";
 import { Provider } from "react-redux";
+import decksReducer from "./store/reducers";
 
 const rootReducer = combineReducers({
-  meals: mealsReducer,
+  decks: decksReducer,
 });
 
 const store = createStore(rootReducer);
 
-useScreens();
+enableScreens();
 
 const fetchFonts = () => {
   return Font.loadAsync({

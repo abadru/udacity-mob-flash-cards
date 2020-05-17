@@ -4,7 +4,7 @@ import {View, Text, StyleSheet} from 'react-native';
 
 const DeckDetailScreen = (props) => {
     return (
-        <View><Text>Add Card Screen</Text></View>
+        <View><Text>Deck Details Screen</Text></View>
     );
 };
 

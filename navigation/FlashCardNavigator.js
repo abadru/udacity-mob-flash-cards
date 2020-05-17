@@ -10,8 +10,10 @@ import DecksScreen from "../screens/DecksScreen";
 import AddDeckScreen from "../screens/AddDeckScreen";
 import DeckDetailScreen from "../screens/DeckDetailScreen";
 import QuizScreen from "../screens/QuizScreen";
+import AddCardScreen from "../screens/AddCardScreen";
 
 const defaultStackNavOptions = {
+  initialRouteName: 'Decks',
   headerStyle: {
     backgroundColor: Platform.OS === "android" ? Colors.primaryColor : "",
   },
@@ -80,10 +82,10 @@ const MainNavigator = createStackNavigator(
   {
     Decks: FlashCardTabNavigator,
     DeckDetail: DeckDetailScreen,
-    AddCard: AddDeckScreen,
+    AddCard: AddCardScreen,
     Quiz: QuizScreen
   },
-    {defaultStackNavOptions}
+    { ...defaultStackNavOptions}
 );
 
 export default createAppContainer(MainNavigator);

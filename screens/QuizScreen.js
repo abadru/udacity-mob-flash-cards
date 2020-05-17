@@ -4,7 +4,7 @@ import {View, Text, StyleSheet} from 'react-native';
 
 const QuizScreen = (props) => {
     return (
-        <View><Text>Add Card Screen</Text></View>
+        <View><Text>Quiz Screen</Text></View>
     );
 };
 
