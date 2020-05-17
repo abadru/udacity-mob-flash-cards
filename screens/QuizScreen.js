@@ -16,7 +16,7 @@ const QuizScreen = (props) => {
 
   const deck = navigation.getParam("deck");
 
-  const _getRemainingCountMessage = () => {
+  const remainingCountMessage = () => {
     const remainingQuestions =
       deck.cards.length - (correctAnswerCount + incorrectAnswerCount + 1);
     return `${remainingQuestions} ${pluralize(
@@ -32,8 +32,8 @@ const QuizScreen = (props) => {
     setShowResults(false);
   };
 
-  const recordAnswer = (knewAnswer) => {
-    // Update answer count.
+  const setAnswer = (knewAnswer) => {
+    // Update answer counts.
     let correctAnswers = correctAnswerCount;
     let incorrectAnswers = incorrectAnswerCount;
     let displayResults = showResults;
@@ -80,8 +80,8 @@ const QuizScreen = (props) => {
   return !showResults ? (
     <View style={styles.container}>
       <QuizCard card={deck.cards[currentQuestionIndex]} />
-      <Text style={styles.count}>{_getRemainingCountMessage()}</Text>
-      <QuizActions recordAnswer={recordAnswer} />
+      <Text style={styles.count}>{remainingCountMessage()}</Text>
+      <QuizActions recordAnswer={setAnswer} />
     </View>
   ) : (
     <QuizResults

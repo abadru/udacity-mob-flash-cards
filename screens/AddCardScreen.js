@@ -12,7 +12,6 @@ import { saveCard } from "../utils/api";
 import CustomButton from "../components/CustomButton";
 
 import Colors from "../constants/Colors";
-import QuizScreen from "./QuizScreen";
 
 const AddCardScreen = (props) => {
   const [question, setQuestion] = useState("");
@@ -26,10 +25,10 @@ const AddCardScreen = (props) => {
       dispatch(createCard(deckId, question, answer));
       saveCard(deckId, { question, answer });
 
-      // Return to Deck Detail view.
+      // Return to Deck Detail Screen.
       props.navigation.goBack();
 
-      // Reset form for future use.
+      // Reset the form.
       setQuestion("");
       setAnswer("");
     } else {

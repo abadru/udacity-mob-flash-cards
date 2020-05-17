@@ -32,7 +32,7 @@ const AddDeckScreen = (props) => {
     };
 
     if (deck.name !== "") {
-      // Dispatch Redux action
+      // Dispatch Redux action to update the store
       dispatch(createDeck(deck.id, deck.name));
       //Save changes
       saveDeck(deck);
@@ -52,7 +52,7 @@ const AddDeckScreen = (props) => {
 
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
-      <Text style={styles.label}>What will you learn in this deck?</Text>
+      <Text style={styles.label}>What is the title of your new deck?</Text>
       <TextInput
         style={styles.input}
         value={deckName}

@@ -24,7 +24,7 @@ const QuizCard = (props) => {
       </View>
       <View style={{ marginTop: 30 }}>
         <CustomButton
-          style={{ backgroundColor: Colors.gray }}
+          style={{ backgroundColor: Colors.purple }}
           onPress={toggleQuestion}
         >{`See ${showQuestion ? "Answer" : "Question"}`}</CustomButton>
       </View>
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: Colors.blue,
+    backgroundColor: Colors.accentColor,
     padding: 30,
     width: 350,
     height: 250,
@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
       width: 4,
       height: 5,
     },
+    elevation: 10,
   },
   text: {
     fontSize: 24,

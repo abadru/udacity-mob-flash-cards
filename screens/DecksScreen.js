@@ -31,16 +31,6 @@ const DecksScreen = (props) => {
     );
   }
 
-  if (Object.values(decks).length === 0) {
-    return (
-      <View style={styles.content}>
-        <Text style={{ color: Colors.accentColor }}>
-          There is no Deck available. Please Add 1 Deck to start!
-        </Text>
-      </View>
-    );
-  }
-
   return Object.values(decks).length > 0 ? (
     <View style={styles.container}>
       <FlatList
@@ -57,14 +47,16 @@ const DecksScreen = (props) => {
       />
     </View>
   ) : (
-    <View style={styles.blank}>
-      <Text style={{ fontSize: 18 }}>You don't have any decks yet.</Text>
+    <View style={styles.content}>
+      <Text style={{ color: Colors.accentColor }}>
+        There is no deck available.
+      </Text>
       <CustomButton
         onPress={() => {
           navigation.navigate("AddDeck");
         }}
       >
-        Create Deck
+        Create New Deck
       </CustomButton>
     </View>
   );
@@ -75,12 +67,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     justifyContent: "flex-start",
-  },
-  blank: {
-    flex: 1,
-    backgroundColor: "white",
-    justifyContent: "center",
-    alignItems: "center",
   },
   content: {
     fontFamily: "open-sans",

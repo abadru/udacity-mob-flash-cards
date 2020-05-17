@@ -18,7 +18,7 @@ const QuizResults = ({
       <CustomButton onPress={() => restartQuiz()}>Restart Quiz</CustomButton>
       <CustomButton
         onPress={() => navigation.goBack()}
-        style={{ backgroundColor: Colors.gray }}
+        style={{ backgroundColor: Colors.purple }}
       >
         Back to Deck
       </CustomButton>

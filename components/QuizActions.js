@@ -8,7 +8,7 @@ const QuizActions = ({ recordAnswer }) => (
     <Text style={styles.heading}>How did you do in this question?</Text>
     <View style={styles.actions}>
       <TouchableOpacity
-        style={[styles.answerBtn, { backgroundColor: Colors.green }]}
+        style={[styles.answerBtn, { backgroundColor: Colors.blue }]}
         onPress={() => recordAnswer(true)}
       >
         <Text style={styles.btnText}>Correct</Text>
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     padding: 20,
     margin: 10,
     width: 150,
-    borderRadius: 5,
+    borderRadius: 10,
   },
   btnText: {
     color: Colors.white,
