@@ -13,7 +13,7 @@ import QuizScreen from "../screens/QuizScreen";
 import AddCardScreen from "../screens/AddCardScreen";
 
 const defaultStackNavOptions = {
-  initialRouteName: 'Decks',
+  initialRouteName: "Decks",
   headerStyle: {
     backgroundColor: Platform.OS === "android" ? Colors.primaryColor : "",
   },
@@ -24,18 +24,14 @@ const defaultStackNavOptions = {
     fontFamily: "open-sans",
   },
   headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor,
-  headerTitle: "A Screen",
 };
-
 
 const tabScreens = {
   Decks: {
     screen: DecksScreen,
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
-        return (
-          <Ionicons name="ios-list" size={25} color={tabInfo.tintColor} />
-        );
+        return <Ionicons name="ios-list" size={25} color={tabInfo.tintColor} />;
       },
       tabBarColor: Colors.primaryColor,
       tabBarLabel:
@@ -59,6 +55,7 @@ const tabScreens = {
         ) : (
           "Add Deck"
         ),
+      headerTitle: "Add Deck",
     },
   },
 };
@@ -83,9 +80,11 @@ const MainNavigator = createStackNavigator(
     Decks: FlashCardTabNavigator,
     DeckDetail: DeckDetailScreen,
     AddCard: AddCardScreen,
-    Quiz: QuizScreen
+    Quiz: QuizScreen,
   },
-    { ...defaultStackNavOptions}
+  {
+    defaultNavigationOptions: defaultStackNavOptions,
+  }
 );
 
 export default createAppContainer(MainNavigator);

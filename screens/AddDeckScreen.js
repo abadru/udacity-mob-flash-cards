@@ -10,7 +10,7 @@ import { generateId } from "../utils/helpers";
 import { useDispatch } from "react-redux";
 import { createDeck } from "../store/actions";
 import { saveDeck } from "../utils/api";
-import CustomButton from "../components/StyledButton";
+import CustomButton from "../components/CustomButton";
 
 import Colors from "../constants/Colors";
 
@@ -31,19 +31,24 @@ const AddDeckScreen = (props) => {
 
   const handleSubmit = () => {
     let deck = _createDeckObject();
-    // Dispatch Redux action
-    dispatch(createDeck(deck.id, deck.name));
-    //Save changes
-    saveDeck(deck);
 
-    // Route to new deck's detail screen.
-    props.navigation.navigate("DeckDetail", {
-      deckId: deck.id,
-      name: deck.name,
-    });
+    if (deck.name !== "") {
+      // Dispatch Redux action
+      dispatch(createDeck(deck.id, deck.name));
+      //Save changes
+      saveDeck(deck);
 
-    // Reset input
-    setInput("");
+      // Route to new deck's detail screen.
+      props.navigation.navigate("DeckDetail", {
+        deckId: deck.id,
+        name: deck.name,
+      });
+
+      // Reset input
+      setInput("");
+    } else {
+      alert("Please specify a deck name");
+    }
   };
 
   return (
@@ -84,5 +89,11 @@ const styles = StyleSheet.create({
     margin: 20,
   },
 });
+
+AddDeckScreen.navigationOptions = (navData) => {
+  return {
+    headerTitle: "Add Deck",
+  };
+};
 
 export default AddDeckScreen;

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { retrieveDecks } from "../utils/api";
 import { receiveDecks } from "../store/actions";
 import DeckCard from "../components/DeckCard";
-import CustomButton from "../components/StyledButton";
+import CustomButton from "../components/CustomButton";
 
 const DecksScreen = (props) => {
   const [ready, setReady] = useState(false);
