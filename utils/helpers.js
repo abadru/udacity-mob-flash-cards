@@ -2,7 +2,7 @@ import { AsyncStorage } from "react-native";
 import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
 
-const NOTIFICATION_KEY = "FlashCards:notifications";
+const NOTIFICATION_KEY = "abadrucards:notifications";
 
 export const generateId = () => {
   return (
