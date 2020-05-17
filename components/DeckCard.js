@@ -8,6 +8,7 @@ import {
   View,
 } from "react-native";
 import Colors from "../constants/Colors";
+import DefaultText from "./DefaultText";
 const DeckCard = ({ id, name, cardCount, navigation }) => (
   <View style={styles.gridItem}>
     <TouchableOpacity
@@ -16,7 +17,7 @@ const DeckCard = ({ id, name, cardCount, navigation }) => (
         navigation.navigate("DeckDetail", { deckId: id, name: name })
       }
     >
-      <Text style={styles.name}>{name}</Text>
+      <DefaultText style={styles.name}>{name}</DefaultText>
       <Text style={styles.count}>{`${cardCount} ${pluralize(
         "Card",
         cardCount
@@ -48,17 +49,20 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     elevation: 5,
-    backgroundColor: "#f5428d",
+    backgroundColor: Colors.accentColor,
   },
   name: {
+    fontFamily: "open-sans-bold",
     fontSize: 30,
     textAlign: "center",
     marginBottom: 5,
+    color: Colors.white,
   },
   count: {
+    fontFamily: "open-sans",
     fontSize: 20,
     textAlign: "center",
-    color: Colors.gray,
+    color: "black",
     marginBottom: 5,
   },
 });
