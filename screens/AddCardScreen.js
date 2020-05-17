@@ -21,15 +21,19 @@ const AddCardScreen = (props) => {
   const handleSubmit = () => {
     let deckId = props.navigation.getParam("deckId");
 
-    dispatch(createCard(deckId, question, answer));
-    saveCard(deckId, { question, answer });
+    if (question !== "" && answer !== "") {
+      dispatch(createCard(deckId, question, answer));
+      saveCard(deckId, { question, answer });
 
-    // Return to Deck Detail view.
-    props.navigation.goBack();
+      // Return to Deck Detail view.
+      props.navigation.goBack();
 
-    // Reset form for future use.
-    setQuestion("");
-    setAnswer("");
+      // Reset form for future use.
+      setQuestion("");
+      setAnswer("");
+    } else {
+      alert("Please fill in the question and respective answer");
+    }
   };
 
   return (

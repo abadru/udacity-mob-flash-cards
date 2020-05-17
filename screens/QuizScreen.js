@@ -6,6 +6,7 @@ import QuizCard from "../components/QuizCard";
 import QuizActions from "../components/QuizActions";
 import QuizResults from "../components/QuizResults";
 import Colors from "../constants/Colors";
+import DefaultText from "../components/DefaultText";
 
 const QuizScreen = (props) => {
   const { navigation } = props;
@@ -68,7 +69,15 @@ const QuizScreen = (props) => {
     setShowResults(displayResults);
   };
 
-  console.log(currentQuestionIndex);
+  if (deck.cards.length === 0) {
+    return (
+      <View style={styles.content}>
+        <Text style={{ color: Colors.red }}>
+          Sorry, you cannot take a quiz because there are no cards on the deck!
+        </Text>
+      </View>
+    );
+  }
 
   return !showResults ? (
     <View style={styles.container}>
@@ -97,6 +106,13 @@ const styles = StyleSheet.create({
     color: Colors.gray,
     fontSize: 20,
     marginTop: 10,
+  },
+  content: {
+    fontFamily: "open-sans",
+    fontSize: 18,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 export default QuizScreen;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import CustomButton from "../components/CustomButton";
@@ -9,10 +9,12 @@ const DeckDetailScreen = (props) => {
   const { navigation } = props;
   const deckId = navigation.getParam("deckId");
 
-  console.log(deckId);
-
   const deck = useSelector((state) => state.decks[deckId]);
-  console.log(deck);
+
+  // To be used on the screen title
+  useEffect(() => {
+    navigation.setParams({ deckName: deck.name });
+  }, [deck]);
 
   return (
     <View style={styles.container}>
@@ -24,7 +26,7 @@ const DeckDetailScreen = (props) => {
         )}`}</Text>
       </View>
       <View style={styles.actions}>
-        {deck.cards.length !== 0 && (
+        {true && (
           <CustomButton
             onPress={() => {
               navigation.navigate("Quiz", { deck });
@@ -47,6 +49,14 @@ const DeckDetailScreen = (props) => {
       </View>
     </View>
   );
+};
+
+DeckDetailScreen.navigationOptions = (navigationData) => {
+  const deckName = navigationData.navigation.getParam("deckName");
+  console.log("Deck Name", deckName);
+  return {
+    headerTitle: deckName,
+  };
 };
 
 const styles = StyleSheet.create({

@@ -42,7 +42,7 @@ const DecksScreen = (props) => {
             navigation={props.navigation}
           />
         )}
-        keyExtractor={(item, index) => item.name}
+        keyExtractor={(item, index) => item.id}
       />
     </View>
   ) : (
@@ -73,10 +73,8 @@ const styles = StyleSheet.create({
   },
 });
 
-DecksScreen.navigationOptions = (navData) => {
-  return {
-    headerTitle: "Decks",
-  };
+DecksScreen.navigationOptions = {
+  headerTitle: "Decks!",
 };
 
 export default DecksScreen;

@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 import { enableScreens } from "react-native-screens";
-
-import MealsNavigator from "./navigation/FlashCardNavigator";
-
 import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import decksReducer from "./store/reducers";
+import MainTabNavigator from "./navigation/FlashCardNavigator";
 
 const rootReducer = combineReducers({
   decks: decksReducer,
@@ -38,7 +36,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <MealsNavigator />
+      <MainTabNavigator />
     </Provider>
   );
 }

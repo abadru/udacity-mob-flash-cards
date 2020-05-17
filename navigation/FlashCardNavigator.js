@@ -13,7 +13,6 @@ import QuizScreen from "../screens/QuizScreen";
 import AddCardScreen from "../screens/AddCardScreen";
 
 const defaultStackNavOptions = {
-  initialRouteName: "Decks",
   headerStyle: {
     backgroundColor: Platform.OS === "android" ? Colors.primaryColor : "",
   },
@@ -26,29 +25,30 @@ const defaultStackNavOptions = {
   headerTintColor: Platform.OS === "android" ? "white" : Colors.primaryColor,
 };
 
-const tabScreens = {
-  Decks: {
-    screen: DecksScreen,
-    navigationOptions: {
-      tabBarIcon: (tabInfo) => {
-        return <Ionicons name="ios-list" size={25} color={tabInfo.tintColor} />;
-      },
-      tabBarColor: Colors.primaryColor,
-      tabBarLabel:
-        Platform.OS === "android" ? (
-          <Text style={{ fontFamily: "open-sans-bold" }}>Decks</Text>
-        ) : (
-          "Decks"
-        ),
+const DecksNavigator = createStackNavigator(
+  {
+    Decks: { screen: DecksScreen },
+    DeckDetail: {
+      screen: DeckDetailScreen,
+      navigationOptions: defaultStackNavOptions,
     },
+    AddCard: { screen: AddCardScreen },
+    Quiz: { screen: QuizScreen },
   },
+  {
+    defaultNavigationOptions: defaultStackNavOptions,
+  }
+);
+
+const tabScreens = {
+  Decks: DecksNavigator,
   AddDeck: {
     screen: AddDeckScreen,
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
         return <Ionicons name="ios-add" size={25} color={tabInfo.tintColor} />;
       },
-      tabBarColor: Colors.accentColor,
+      tabBarColor: Colors.primaryColor,
       tabBarLabel:
         Platform.OS === "android" ? (
           <Text style={{ fontFamily: "open-sans-bold" }}>Add Deck</Text>
@@ -60,10 +60,13 @@ const tabScreens = {
   },
 };
 
-const FlashCardTabNavigator =
+const MainTabNavigator =
   Platform.OS === "android"
     ? createMaterialBottomTabNavigator(tabScreens, {
-        activeColor: "white",
+        activeTintColor: Colors.accentColor,
+        labelStyle: {
+          fontFamily: "open-sans-bold",
+        },
         shifting: true,
       })
     : createBottomTabNavigator(tabScreens, {
@@ -71,20 +74,8 @@ const FlashCardTabNavigator =
           labelStyle: {
             fontFamily: "open-sans-old",
           },
-          activeTintColor: Colors.accentColor,
+          activeTintColor: Colors.primaryColor,
         },
       });
 
-const MainNavigator = createStackNavigator(
-  {
-    Decks: FlashCardTabNavigator,
-    DeckDetail: DeckDetailScreen,
-    AddCard: AddCardScreen,
-    Quiz: QuizScreen,
-  },
-  {
-    defaultNavigationOptions: defaultStackNavOptions,
-  }
-);
-
-export default createAppContainer(MainNavigator);
+export default createAppContainer(MainTabNavigator);

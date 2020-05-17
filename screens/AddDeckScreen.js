@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import {
-  View,
   Text,
   StyleSheet,
   KeyboardAvoidingView,
   TextInput,
 } from "react-native";
 import { generateId } from "../utils/helpers";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createDeck } from "../store/actions";
 import { saveDeck } from "../utils/api";
 import CustomButton from "../components/CustomButton";
@@ -15,24 +14,27 @@ import CustomButton from "../components/CustomButton";
 import Colors from "../constants/Colors";
 
 const AddDeckScreen = (props) => {
-  const [input, setInput] = useState("");
+  const [deckName, setDeckName] = useState("");
+
+  const existingDecks = useSelector((state) => state.decks);
 
   const dispatch = useDispatch();
 
-  const _createDeckObject = () => ({
-    id: generateId(),
-    name: input,
-    cards: [],
-  });
-
   const handleInputChange = (value) => {
-    setInput(value);
+    setDeckName(value);
   };
 
   const handleSubmit = () => {
-    let deck = _createDeckObject();
+    let deck = {
+      id: generateId(),
+      name: deckName,
+      cards: [],
+    };
 
-    if (deck.name !== "") {
+    const exist =
+      existingDecks.findIndex((deck) => deck.name === deckName) >= 0;
+
+    if (deck.name !== "" && !exist) {
       // Dispatch Redux action
       dispatch(createDeck(deck.id, deck.name));
       //Save changes
@@ -45,7 +47,7 @@ const AddDeckScreen = (props) => {
       });
 
       // Reset input
-      setInput("");
+      setDeckName("");
     } else {
       alert("Please specify a deck name");
     }
@@ -56,7 +58,7 @@ const AddDeckScreen = (props) => {
       <Text style={styles.label}>What will you learn in this deck?</Text>
       <TextInput
         style={styles.input}
-        value={input}
+        value={deckName}
         placeholder="e.g. React Native"
         onChangeText={handleInputChange}
       />
