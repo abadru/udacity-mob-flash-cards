@@ -13,3 +13,6 @@ You are all set, this app is now running in your iOS simulator.
 
 Alternatively you can also use npm instead of yarn:
 `npm install` and `npm start`
+
+
+This project has been fully tested on android real device: Samsung Galaxy S10 plus
