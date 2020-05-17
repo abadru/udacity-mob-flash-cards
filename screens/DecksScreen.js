@@ -5,6 +5,7 @@ import { retrieveDecks } from "../utils/api";
 import { receiveDecks } from "../store/actions";
 import DeckCard from "../components/DeckCard";
 import CustomButton from "../components/CustomButton";
+import Colors from "../constants/Colors";
 
 const DecksScreen = (props) => {
   const [ready, setReady] = useState(false);
@@ -26,6 +27,16 @@ const DecksScreen = (props) => {
     return (
       <View style={styles.blank}>
         <Text>Loading...</Text>
+      </View>
+    );
+  }
+
+  if (Object.values(decks).length === 0) {
+    return (
+      <View style={styles.content}>
+        <Text style={{ color: Colors.accentColor }}>
+          There is no Deck available. Please Add 1 Deck to start!
+        </Text>
       </View>
     );
   }
@@ -68,6 +79,13 @@ const styles = StyleSheet.create({
   blank: {
     flex: 1,
     backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  content: {
+    fontFamily: "open-sans",
+    fontSize: 18,
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },

@@ -31,10 +31,7 @@ const AddDeckScreen = (props) => {
       cards: [],
     };
 
-    const exist =
-      existingDecks.findIndex((deck) => deck.name === deckName) >= 0;
-
-    if (deck.name !== "" && !exist) {
+    if (deck.name !== "") {
       // Dispatch Redux action
       dispatch(createDeck(deck.id, deck.name));
       //Save changes
@@ -59,7 +56,7 @@ const AddDeckScreen = (props) => {
       <TextInput
         style={styles.input}
         value={deckName}
-        placeholder="e.g. React Native"
+        placeholder="Type your deck name"
         onChangeText={handleInputChange}
       />
       <CustomButton onPress={handleSubmit}>

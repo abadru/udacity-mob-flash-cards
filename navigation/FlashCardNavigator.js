@@ -40,10 +40,12 @@ const DecksNavigator = createStackNavigator(
   }
 );
 
-const tabScreens = {
-  Decks: DecksNavigator,
-  AddDeck: {
-    screen: AddDeckScreen,
+const DeckNavigator = createStackNavigator(
+  {
+    AddDeck: { screen: AddDeckScreen },
+  },
+  {
+    defaultNavigationOptions: defaultStackNavOptions,
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
         return <Ionicons name="ios-add" size={25} color={tabInfo.tintColor} />;
@@ -57,7 +59,27 @@ const tabScreens = {
         ),
       headerTitle: "Add Deck",
     },
+  }
+);
+
+const tabScreens = {
+  Decks: {
+    screen: DecksNavigator,
+    navigationOptions: {
+      tabBarIcon: (tabInfo) => {
+        return <Ionicons name="ios-list" size={25} color={tabInfo.tintColor} />;
+      },
+      tabBarColor: Colors.primaryColor,
+      tabBarLabel:
+        Platform.OS === "android" ? (
+          <Text style={{ fontFamily: "open-sans-bold" }}>Decks</Text>
+        ) : (
+          "Decks"
+        ),
+      headerTitle: "Decks",
+    },
   },
+  AddDeck: DeckNavigator,
 };
 
 const MainTabNavigator =
@@ -67,7 +89,7 @@ const MainTabNavigator =
         labelStyle: {
           fontFamily: "open-sans-bold",
         },
-        shifting: true,
+        shifting: false,
       })
     : createBottomTabNavigator(tabScreens, {
         tabBarOptions: {

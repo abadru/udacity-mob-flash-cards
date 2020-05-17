@@ -6,7 +6,6 @@ import QuizCard from "../components/QuizCard";
 import QuizActions from "../components/QuizActions";
 import QuizResults from "../components/QuizResults";
 import Colors from "../constants/Colors";
-import DefaultText from "../components/DefaultText";
 
 const QuizScreen = (props) => {
   const { navigation } = props;
@@ -16,7 +15,6 @@ const QuizScreen = (props) => {
   const [showResults, setShowResults] = useState(false);
 
   const deck = navigation.getParam("deck");
-  console.log(deck);
 
   const _getRemainingCountMessage = () => {
     const remainingQuestions =
@@ -93,6 +91,13 @@ const QuizScreen = (props) => {
       navigation={navigation}
     />
   );
+};
+
+QuizScreen.navigationOptions = (navigationData) => {
+  const deck = navigationData.navigation.getParam("deck");
+  return {
+    headerTitle: `Quiz for deck ${deck.name}`,
+  };
 };
 
 const styles = StyleSheet.create({

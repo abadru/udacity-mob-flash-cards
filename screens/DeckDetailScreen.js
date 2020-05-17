@@ -1,20 +1,37 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import CustomButton from "../components/CustomButton";
 import Colors from "../constants/Colors";
 import pluralize from "pluralize";
+import { deleteDeck } from "../store/actions";
+import { removeDeck } from "../utils/api";
 
 const DeckDetailScreen = (props) => {
   const { navigation } = props;
   const deckId = navigation.getParam("deckId");
 
   const deck = useSelector((state) => state.decks[deckId]);
-
   // To be used on the screen title
   useEffect(() => {
     navigation.setParams({ deckName: deck.name });
-  }, [deck]);
+  }, [deckId]);
+
+  const dispatch = useDispatch();
+
+  const handleDelete = () => {
+    dispatch(deleteDeck(deckId));
+    removeDeck(deckId);
+    navigation.goBack();
+  };
+
+  if (!deck || deck === "undefined" || deck === null) {
+    return (
+      <View>
+        <Text>The selected deck does not exists</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -26,25 +43,36 @@ const DeckDetailScreen = (props) => {
         )}`}</Text>
       </View>
       <View style={styles.actions}>
-        {true && (
-          <CustomButton
-            onPress={() => {
-              navigation.navigate("Quiz", { deck });
-            }}
-          >
-            <Text>Start Quiz</Text>
-          </CustomButton>
-        )}
         <CustomButton
           style={{
             backgroundColor:
               deck.cards.length !== 0 ? Colors.gray : Colors.green,
           }}
           onPress={() => {
-            navigation.navigate("AddCard", { deckId: deck.id });
+            navigation.navigate("AddCard", {
+              deckId: deck.id,
+              deckName: deck.name,
+            });
           }}
         >
           <Text>Add Card</Text>
+        </CustomButton>
+
+        <CustomButton
+          onPress={() => {
+            navigation.navigate("Quiz", { deck });
+          }}
+        >
+          <Text>Start Quiz</Text>
+        </CustomButton>
+
+        <CustomButton
+          style={{
+            backgroundColor: Colors.red,
+          }}
+          onPress={handleDelete}
+        >
+          <Text>Delete Deck</Text>
         </CustomButton>
       </View>
     </View>
@@ -53,7 +81,6 @@ const DeckDetailScreen = (props) => {
 
 DeckDetailScreen.navigationOptions = (navigationData) => {
   const deckName = navigationData.navigation.getParam("deckName");
-  console.log("Deck Name", deckName);
   return {
     headerTitle: deckName,
   };

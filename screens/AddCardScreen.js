@@ -12,6 +12,7 @@ import { saveCard } from "../utils/api";
 import CustomButton from "../components/CustomButton";
 
 import Colors from "../constants/Colors";
+import QuizScreen from "./QuizScreen";
 
 const AddCardScreen = (props) => {
   const [question, setQuestion] = useState("");
@@ -43,7 +44,7 @@ const AddCardScreen = (props) => {
         <TextInput
           style={styles.input}
           value={question}
-          placeholder="e.g. What's the fastest land mammal?"
+          placeholder="Question?"
           onChangeText={(question) => {
             setQuestion(question);
           }}
@@ -54,7 +55,7 @@ const AddCardScreen = (props) => {
         <TextInput
           style={styles.input}
           value={answer}
-          placeholder="e.g. Cheetah"
+          placeholder="Answer"
           onChangeText={(answer) => {
             setAnswer(answer);
           }}
@@ -65,6 +66,13 @@ const AddCardScreen = (props) => {
       </CustomButton>
     </KeyboardAvoidingView>
   );
+};
+
+AddCardScreen.navigationOptions = (navigationData) => {
+  const deckName = navigationData.navigation.getParam("deckName");
+  return {
+    headerTitle: `Add Card for deck ${deckName}`,
+  };
 };
 
 const styles = StyleSheet.create({
